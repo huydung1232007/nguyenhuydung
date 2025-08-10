@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Huy Dũng — Portfolio</title>
+  <meta name="description" content="Huy Dũng." />
+  <meta property="og:title" content="Huy Dũng — Portfolio">
+  <meta property="og:description" content="Xây sản phẩm nhanh, sạch, trải nghiệm mượt — xem dự án & liên hệ!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1200&auto=format&fit=crop">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{ fontFamily:{ sans:['Inter','system-ui','sans-serif'] } } } }
+  </script>
+  <style>
+    html, body { height: 100%; scroll-behavior:smooth }
+    :root{ --brand1: #a855f7; --brand2:#6366f1; --card: rgba(255,255,255,.06); --stroke: rgba(255,255,255,.12) }
+    .brand-gradient { background: linear-gradient(135deg,var(--brand1),var(--brand2)); }
+    .text-gradient { background: linear-gradient(135deg,#fff,#ffffffb3); -webkit-background-clip:text; background-clip:text; color: transparent; }
+    .glass { background: var(--card); backdrop-filter: blur(16px); border:1px solid var(--stroke); }
+    .glow-border{ position: relative; }
+    .glow-border::before{ content:''; position:absolute; inset:-1px; border-radius:16px; background: radial-gradient(600px circle at var(--x,0) var(--y,0), rgba(255,255,255,.16), transparent 40%); opacity:0; transition:opacity .35s; pointer-events:none }
+    .glow-border:hover::before{ opacity:1 }
+    .tilt{ transform-style: preserve-3d; will-change: transform; transition: transform .2s ease }
+    .tilt > *{ transform: translateZ(22px) }
+    .orb{ filter: blur(28px); opacity:.4; animation: float 6s ease-in-out infinite }
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    /* Animated background */
+    .bg-aurora{ position:fixed; inset:0; z-index:-10; background:
+      radial-gradient(40% 30% at 10% 10%, rgba(168,85,247,.18), transparent 60%),
+      radial-gradient(35% 25% at 80% 20%, rgba(99,102,241,.18), transparent 60%),
+      radial-gradient(25% 20% at 30% 80%, rgba(16,185,129,.12), transparent 60%),
+      radial-gradient(25% 20% at 75% 75%, rgba(251,191,36,.12), transparent 60%);
+    }
+    .cursor-ring{ position: fixed; top:0; left:0; width:28px; height:28px; border:1px solid #ffffff80; border-radius:9999px; pointer-events:none; mix-blend-mode: difference; transform: translate(-50%,-50%); z-index:50; transition: width .15s, height .15s, opacity .3s }
+    .badge{ border:1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06); padding:.35rem .7rem; border-radius:9999px; font-size:.875rem; color:#fff; display:inline-block }
+    .reveal{ opacity:0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease }
+    .reveal.on{ opacity:1; transform: translateY(0) }
+    /* Slider */
+    .slider{ display:grid; grid-auto-flow:column; gap:16px; animation: slide 18s linear infinite }
+    .slider:hover{ animation-play-state: paused }
+    @keyframes slide{ 0%{transform: translateX(0)} 100%{ transform: translateX(-50%) } }
+    /* Color themes */
+    .theme-emerald{ --brand1:#10b981; --brand2:#22d3ee }
+    .theme-amber{ --brand1:#f59e0b; --brand2:#f97316 }
+  </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 selection:bg-fuchsia-500/30 selection:text-white">
+  <!-- CONFIG: sửa nhanh ở đây -->
+  <div id="config" data-name="Huy Dũng" data-role="Software Engineer / Frontend Wizard" data-tagline="Xây sản phẩm nhanh, sạch, và giàu trải nghiệm. Đam mê AI, UI/UX và hệ thống hiệu năng cao." data-location="Hồ Chí Minh, Việt Nam" data-email="huydung1372007@gmail.com" data-phone="+84 90 000 0000" data-github="https://github.com/" data-linkedin="https://www.linkedin.com/in/" data-twitter="https://twitter.com/" data-resume="#" hidden></div>
+
+  <!-- Background effects -->
+  <div class="bg-aurora"></div>
+  <div class="pointer-events-none fixed inset-0 -z-10 opacity-[0.06]" style="background-image:linear-gradient(to right, rgba(255,255,255,.6) 1px, transparent 1px),linear-gradient(to bottom, rgba(255,255,255,.6) 1px, transparent 1px); background-size:40px 40px"></div>
+  <div class="pointer-events-none fixed left-1/2 top-1/3 -z-10 h-[50vmax] w-[50vmax] -translate-x-1/2 rounded-full brand-gradient orb"></div>
+
+  <!-- Cursor ring -->
+  <div class="cursor-ring" id="cursor"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-zinc-950/50 backdrop-blur supports-[backdrop-filter]:bg-zinc-950/50">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+      <a href="#home" class="flex items-center gap-2 font-semibold tracking-tight">
+        <div class="grid h-8 w-8 place-items-center rounded-xl brand-gradient text-white shadow">HD</div>
+        <span class="hidden sm:block" id="nav-name">Huy Dũng</span>
+      </a>
+      <nav class="hidden items-center gap-1 md:flex">
+        <a href="#about" class="rounded-full px-3 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white">Giới thiệu</a>
+        <a href="#projects" class="rounded-full px-3 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white">Dự án</a>
+        <a href="#skills" class="rounded-full px-3 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white">Kỹ năng</a>
+        <a href="#contact" class="rounded-full px-3 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white">Liên hệ</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a id="resumeTop" href="#" target="_blank" class="hidden rounded-full border border-white/15 px-3 py-2 text-sm text-white/90 hover:bg-white/10 md:block">CV</a>
+        <div class="flex items-center gap-1">
+          <button data-theme="default" class="h-6 w-6 rounded-full ring-1 ring-white/20 brand-gradient"></button>
+          <button data-theme="emerald" class="h-6 w-6 rounded-full ring-1 ring-white/20 bg-gradient-to-br from-emerald-500 to-cyan-400"></button>
+          <button data-theme="amber" class="h-6 w-6 rounded-full ring-1 ring-white/20 bg-gradient-to-br from-amber-500 to-orange-500"></button>
+        </div>
+        <button id="themeToggle" class="rounded-full border border-white/15 p-2 hover:bg-white/10" aria-label="Chuyển chế độ">
+          <svg id="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4 hidden"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79l1.8-1.79m10.48 0l1.79-1.79l1.79 1.79l-1.79 1.79l-1.79-1.79M12 4V1h-0v3h0m0 19v-3h0v3h0M4 13H1v-2h3v2m19 0h-3v-2h3v2M6.76 19.16l-1.8 1.79l-1.79-1.79l1.79-1.79l1.8 1.79m10.48 0l1.79 1.79l1.79-1.79l-1.79-1.79l-1.79 1.79M12 8a4 4 0 100 8a4 4 0 000-8z"/></svg>
+          <svg id="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4"><path fill="currentColor" d="M12 2a9.99 9.99 0 00-8.94 5.56A10 10 0 0012 22a10 10 0 006.94-2.77A8 8 0 0112 2z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main id="home" class="mx-auto max-w-6xl px-4">
+    <!-- Hero -->
+    <section class="relative flex min-h-[80vh] flex-col items-center justify-center text-center">
+      <div class="reveal">
+        <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.64 5.64l2.83 2.83M15.53 15.53l2.83 2.83M5.64 18.36l2.83-2.83M15.53 8.47l2.83-2.83" stroke-width="2" stroke-linecap="round"/></svg>
+          Luôn sẵn sàng cho thử thách mới
+        </div>
+        <h1 class="text-balance text-gradient text-5xl font-extrabold leading-tight sm:text-6xl lg:text-7xl" id="hero-name">Huy Dũng</h1>
+        <p class="mt-3 text-lg text-white/70 sm:text-xl" id="hero-role">Software Engineer / Frontend Wizard</p>
+        <p class="mx-auto mt-4 max-w-2xl text-white/60" id="hero-tagline">Xây sản phẩm nhanh, sạch, và giàu trải nghiệm. Đam mê AI, UI/UX và hệ thống hiệu năng cao.</p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <a href="#contact" class="group inline-flex items-center gap-2 rounded-full px-5 py-3 font-medium text-white shadow-lg shadow-fuchsia-500/20 transition hover:scale-[1.02]" style="background:linear-gradient(135deg,var(--brand1),var(--brand2))">Liên hệ tôi
+            <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a id="resumeHero" href="#" target="_blank" class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 font-medium text-white/90 hover:bg-white/10">Tải CV
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="mt-8 flex items-center justify-center gap-4 text-white/80">
+          <a id="socialGithub" href="#" target="_blank" class="hover:text-white">GitHub</a>
+          <a id="socialLinkedin" href="#" target="_blank" class="hover:text-white">LinkedIn</a>
+          <a id="socialTwitter" href="#" target="_blank" class="hover:text-white">Twitter</a>
+        </div>
+      </div>
+      <!-- Stats -->
+      <div class="mt-14 grid w-full max-w-3xl grid-cols-3 gap-3">
+        <div class="glass rounded-2xl p-4 text-center reveal"><div class="text-3xl font-extrabold" data-count="48">0</div><div class="text-white/60 text-sm">Repos</div></div>
+        <div class="glass rounded-2xl p-4 text-center reveal"><div class="text-3xl font-extrabold" data-count="12">0</div><div class="text-white/60 text-sm">Dự án production</div></div>
+        <div class="glass rounded-2xl p-4 text-center reveal"><div class="text-3xl font-extrabold" data-count="5">0</div><div class="text-white/60 text-sm">Năm kinh nghiệm</div></div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="scroll-mt-24">
+      <h2 class="mb-6 flex items-center gap-3 text-2xl font-semibold text-white reveal">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12l2-2 4 4L21 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Giới thiệu
+      </h2>
+      <div class="glow-border relative overflow-hidden rounded-2xl glass p-6 shadow-xl">
+        <div class="grid gap-6 md:grid-cols-3">
+          <div class="md:col-span-2 reveal">
+            <p class="text-white/80">Tôi xây các sản phẩm web chất lượng production, tối ưu hiệu năng, dễ mở rộng và đẹp mắt. Tập trung vào trải nghiệm người dùng, tốc độ, và tính ổn định theo thời gian.</p>
+            <ul class="mt-4 grid gap-2 text-white/70 sm:grid-cols-2">
+              <li class="flex items-center gap-2"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke-width="2"/><circle cx="12" cy="7" r="4" stroke-width="2"/></svg> 5+ năm phát triển Frontend & Platform</li>
+              <li class="flex items-center gap-2"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C8 2 5 5 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-4-3-7-7-7zm0 9a2 2 0 110-4 2 2 0 010 4z"/></svg> <span id="about-location">Hồ Chí Minh, Việt Nam</span></li>
+              <li class="flex items-center gap-2"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg> <span id="about-email">huydung1372007@gmail.com</span></li>
+              <li class="flex items-center gap-2"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92V21a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3 5.18 2 2 0 0 1 5 3h4.09A2 2 0 0 1 11 4.72a12.05 12.05 0 0 0 6.29 6.29A2 2 0 0 1 19.28 12V16.92z"/></svg> <span id="about-phone">+84 90 000 0000</span></li>
+            </ul>
+            <div class="mt-4 flex flex-wrap gap-2" id="skills-chips"></div>
+          </div>
+          <div class="flex items-center justify-center reveal">
+            <div class="relative h-40 w-40 overflow-hidden rounded-2xl border border-white/10 shadow-2xl tilt">
+              <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(168,85,247,.4), rgba(99,102,241,.4))"></div>
+              <img id="avatar" src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=800&auto=format&fit=crop" alt="Avatar" class="h-full w-full object-cover"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="scroll-mt-24 mt-12">
+      <h2 class="mb-6 flex items-center gap-3 text-2xl font-semibold text-white reveal">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3 7l7 1l-5 5l1 7l-6-3l-6 3l1-7L2 10l7-1l3-7z" stroke-width="2" stroke-linejoin="round"/></svg>
+        Dự án nổi bật
+      </h2>
+      <div id="projects-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+    <!-- Marquee testimonials -->
+    <section class="mt-12">
+      <div class="glass rounded-2xl p-6 overflow-hidden">
+        <div class="slider" id="marquee">
+          <div class="glass rounded-xl p-4 min-w-[260px]">“Rất nhanh và tỉ mỉ — ship tính năng trước deadline.” — PM</div>
+          <div class="glass rounded-xl p-4 min-w-[260px]">“UI mượt và chỉn chu, code dễ bảo trì.” — Tech Lead</div>
+          <div class="glass rounded-xl p-4 min-w-[260px]">“Hợp tác cực tốt, giải quyết vấn đề rõ ràng.” — Designer</div>
+          <div class="glass rounded-xl p-4 min-w-[260px]">“Performance tăng 40%, chi phí giảm đáng kể.” — VP Eng</div>
+          <!-- duplicated for seamless loop -->
+          <div class="glass rounded-xl p-4 min-w-[260px]">“Rất nhanh và tỉ mỉ — ship tính năng trước deadline.” — PM</div>
+          <div class="glass rounded-xl p-4 min-w-[260px]">“UI mượt và chỉn chu, code dễ bảo trì.” — Tech Lead</div>
+          <div class="glass rounded-xl p-4 min-w-[260px]">“Hợp tác cực tốt, giải quyết vấn đề rõ ràng.” — Designer</div>
+          <div class="glass rounded-xl p-4 min-w-[260px]">“Performance tăng 40%, chi phí giảm đáng kể.” — VP Eng</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="scroll-mt-24 mt-12">
+      <h2 class="mb-6 flex items-center gap-3 text-2xl font-semibold text-white reveal">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12l2 2l4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Kỹ năng & công nghệ
+      </h2>
+      <div class="glow-border rounded-2xl glass p-6">
+        <div class="flex flex-wrap gap-2" id="skills-all"></div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="scroll-mt-24 mt-12">
+      <h2 class="mb-6 flex items-center gap-3 text-2xl font-semibold text-white reveal">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18" stroke-width="2"/></svg>
+        Dấu mốc
+      </h2>
+      <ol class="relative border-s border-white/10 ps-6">
+        <li class="mb-8 reveal">
+          <div class="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full brand-gradient"></div>
+          <time class="text-white/50 text-sm">2025</time>
+          <h3 class="font-semibold">Ra mắt VietGPT Tools</h3>
+          <p class="text-white/70">Tăng tốc quy trình nội dung với AI, 5k+ users.</p>
+        </li>
+        <li class="mb-8 reveal">
+          <div class="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full brand-gradient"></div>
+          <time class="text-white/50 text-sm">2024</time>
+          <h3 class="font-semibold">Nebula UI v1.0</h3>
+          <p class="text-white/70">Thư viện component nhẹ, dark mode & theming.</p>
+        </li>
+        <li class="reveal">
+          <div class="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full brand-gradient"></div>
+          <time class="text-white/50 text-sm">2023</time>
+          <h3 class="font-semibold">Realtime Board</h3>
+          <p class="text-white/70">CRDT + WebRTC, cộng tác thời gian thực.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="scroll-mt-24 mt-12">
+      <h2 class="mb-6 flex items-center gap-3 text-2xl font-semibold text-white reveal">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+        Liên hệ
+      </h2>
+      <div class="glow-border rounded-2xl glass p-6">
+        <form class="grid gap-4 sm:grid-cols-2" id="contact-form">
+          <div class="sm:col-span-1">
+            <label class="mb-2 block text-sm text-white/70">Tên</label>
+            <input name="name" required class="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2" style="--tw-ring-color: var(--brand1)" placeholder="Nguyễn Văn A" />
+          </div>
+          <div class="sm:col-span-1">
+            <label class="mb-2 block text-sm text-white/70">Email</label>
+            <input name="email" type="email" required class="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2" style="--tw-ring-color: var(--brand1)" placeholder="ban@congty.com" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="mb-2 block text-sm text-white/70">Lời nhắn</label>
+            <textarea name="message" required rows="4" class="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2" style="--tw-ring-color: var(--brand1)" placeholder="Mình có dự án thú vị muốn hợp tác..."></textarea>
+          </div>
+          <div class="sm:col-span-2">
+            <button type="submit" class="inline-flex items-center gap-2 rounded-xl px-5 py-3 font-medium text-white shadow-lg transition hover:scale-[1.01]" style="background:linear-gradient(135deg,var(--brand1),var(--brand2))">
+              Gửi
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="mt-16 flex items-center justify-between border-t border-white/10 py-10 text-sm text-white/50">
+      <p id="copyright">© 2025 Huy Dũng. Built with ❤️ & caffeine.</p>
+      <a href="#home" class="rounded-full border border-white/15 bg-white/5 px-3 py-1 hover:bg-white/10">Lên đầu trang</a>
+    </footer>
+  </main>
+
+  <script>
+    // ===== Data mẫu
+    const SKILLS = ["TypeScript","React","Next.js","Node.js","WebSocket","PostgreSQL","TailwindCSS","Framer Motion","Playwright","Vite","Vitest","CI/CD"]; 
+    const PROJECTS = [
+      { title: "Nebula UI", desc: "Thư viện component siêu nhẹ cho Web, tối ưu hiệu năng & dark mode.", tags: ["HTML","CSS","JS"], links: { demo: "#", code: "#" } },
+      { title: "VietGPT Tools", desc: "Bộ công cụ tự động hoá nội dung với AI, workflow kéo-thả.", tags: ["AI","Workflow"], links: { demo: "#", code: "#" } },
+      { title: "Realtime Board", desc: "Canvas cộng tác thời gian thực với CRDT, multi-cursor.", tags: ["WebRTC","CRDT"], links: { demo: "#", code: "#" } },
+    ];
+
+    const $ = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+    // ===== Apply config
+    (function applyConfig(){
+      const cfg = $('#config');
+      const name = cfg.dataset.name || 'Your Name';
+      const role = cfg.dataset.role || '';
+      const tagline = cfg.dataset.tagline || '';
+      const location = cfg.dataset.location || '';
+      const email = cfg.dataset.email || '';
+      const phone = cfg.dataset.phone || '';
+      const github = cfg.dataset.github || '#';
+      const linkedin = cfg.dataset.linkedin || '#';
+      const twitter = cfg.dataset.twitter || '#';
+      const resume = cfg.dataset.resume || '#';
+      $('#nav-name').textContent = name;
+      $('#hero-name').textContent = name;
+      $('#hero-role').textContent = role;
+      $('#hero-tagline').textContent = tagline;
+      $('#about-location').textContent = location;
+      $('#about-email').textContent = email;
+      $('#about-phone').textContent = phone;
+      $('#resumeTop').href = resume;
+      $('#resumeHero').href = resume;
+      $('#socialGithub').href = github;
+      $('#socialLinkedin').href = linkedin;
+      $('#socialTwitter').href = twitter;
+      $('#copyright').textContent = `© ${new Date().getFullYear()} ${name}. Built with ❤️ & caffeine.`;
+
+      const chip = (t) => `<span class="badge">${t}</span>`;
+      $('#skills-chips').innerHTML = SKILLS.slice(0,8).map(chip).join('');
+      $('#skills-all').innerHTML = SKILLS.map(chip).join('');
+
+      const card = (p) => `
+        <div class="glow-border h-full overflow-hidden rounded-2xl glass p-6 shadow-xl tilt">
+          <div class="flex h-full flex-col">
+            <h3 class="text-lg font-semibold text-white">${p.title}</h3>
+            <p class="mt-2 flex-1 text-white/70">${p.desc}</p>
+            <div class="mt-3 flex flex-wrap gap-2">${p.tags.map(chip).join('')}</div>
+            <div class="mt-4 flex items-center gap-3">
+              <a href="${p.links.demo}" class="inline-flex items-center gap-1 text-sm text-white/80 underline-offset-4 hover:text-white hover:underline">Demo</a>
+              <a href="${p.links.code}" class="inline-flex items-center gap-1 text-sm text-white/80 underline-offset-4 hover:text-white hover:underline">Mã nguồn</a>
+            </div>
+          </div>
+        </div>`;
+      $('#projects-grid').innerHTML = PROJECTS.map(card).join('');
+    })();
+
+    // ===== Hover light effect tracking
+    window.addEventListener('mousemove', (e) => {
+      $$('.glow-border').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--x', `${e.clientX - r.left}px`);
+        el.style.setProperty('--y', `${e.clientY - r.top}px`);
+      });
+      const c = $('#cursor');
+      c.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+
+    // ===== 3D tilt for cards
+    const tiltify = (el) => {
+      const b = el.getBoundingClientRect();
+      el.addEventListener('mousemove', (e) => {
+        const x = (e.clientX - b.left)/b.width * 2 - 1;
+        const y = (e.clientY - b.top)/b.height * 2 - 1;
+        el.style.transform = `rotateY(${x*8}deg) rotateX(${-y*8}deg)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = 'rotateY(0) rotateX(0)' });
+    };
+    $$('.tilt').forEach(tiltify);
+
+    // ===== Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target) } })
+    }, { threshold:.18 });
+    $$('.reveal').forEach(el=>io.observe(el));
+
+    // ===== Theme & brand palette
+    const html = document.documentElement;
+    const themeBtn = $('#themeToggle');
+    const sun = $('#sun');
+    const moon = $('#moon');
+    const KEY_T = 'theme';
+    const applyTheme = (m) => { if (m === 'light') { html.classList.remove('dark'); sun.classList.remove('hidden'); moon.classList.add('hidden'); } else { html.classList.add('dark'); sun.classList.add('hidden'); moon.classList.remove('hidden'); } };
+    applyTheme(localStorage.getItem(KEY_T) || 'dark');
+    themeBtn.addEventListener('click', () => { const cur = html.classList.contains('dark') ? 'dark' : 'light'; const next = cur === 'dark' ? 'light' : 'dark'; localStorage.setItem(KEY_T, next); applyTheme(next); });
+
+    // Color dots
+    const KEY_C = 'theme-color';
+    const root = document.body;
+    const applyColor = (k) => { root.classList.remove('theme-emerald','theme-amber'); if(k==='emerald') root.classList.add('theme-emerald'); else if(k==='amber') root.classList.add('theme-amber'); };
+    applyColor(localStorage.getItem(KEY_C) || '');
+    $$('[data-theme]').forEach(btn => btn.addEventListener('click', ()=>{ const k = btn.dataset.theme; localStorage.setItem(KEY_C, k==='default'?'':k); applyColor(k); }));
+
+    // ===== Stats counter
+    const easeOut = (t)=>t*(2-t);
+    const runCounter = (el, to, dur=1200)=>{
+      const st = performance.now();
+      const tick = (now)=>{ const p = Math.min(1, (now-st)/dur); el.textContent = Math.round(easeOut(p)*to); if(p<1) requestAnimationFrame(tick) };
+      requestAnimationFrame(tick);
+    };
+    $$('#home [data-count]').forEach(el=> runCounter(el, parseInt(el.dataset.count,10)));
+
+    // ===== Contact form -> mailto
+    $('#contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const subject = encodeURIComponent(`[Portfolio] ${fd.get('name')} muốn kết nối`);
+      const body = encodeURIComponent(`${fd.get('message')}\n\nEmail: ${fd.get('email')}`);
+      const email = $('#config').dataset.email || '';
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    });
+
+    // ===== Keyboard shortcuts
+    window.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase()==='t'){ themeBtn.click() }
+      if(e.key.toLowerCase()==='g'){ document.querySelectorAll('.glow-border').forEach(el=>el.classList.toggle('!ring-1')) }
+    });
+  </script>
+</body>
+</html>
